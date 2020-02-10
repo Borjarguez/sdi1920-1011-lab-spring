@@ -1,41 +1,36 @@
 package com.uniovi.services;
 
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.List;
 
-import javax.annotation.PostConstruct;
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.uniovi.entities.Teacher;
+import com.uniovi.repositories.TeachersRepository;
 
 @Service
 public class TeacherService {
 
-	private List<Teacher> teachersList = new LinkedList<Teacher>();
-
-	@PostConstruct
-	public void init() {
-		teachersList.add(new Teacher(1L, "pepe", "prueba", "prueba", "t"));
-	}
+	@Autowired
+	private TeachersRepository teachersRepository;
 
 	public List<Teacher> getTeachers() {
-		return teachersList;
+		List<Teacher> teachers = new ArrayList<Teacher>();
+		teachersRepository.findAll().forEach(teachers::add);
+		return teachers;
 	}
 
 	public Teacher getTeacher(Long id) {
-		return teachersList.parallelStream().filter(t -> t.getId().equals(id)).findFirst().get();
+		return teachersRepository.findById(id).get();
 	}
 
 	public void addTeacher(Teacher t) {
-		if (t.getId() == null) {
-			t.setId(teachersList.get(teachersList.size() - 1).getId() + 1);
-		}
-		teachersList.add(t);
+		teachersRepository.save(t);
 	}
 
 	public void deleteTeacher(Long id) {
-		teachersList.removeIf(t -> t.getId().equals(id));
+		teachersRepository.deleteById(id);
 	}
 
 }
