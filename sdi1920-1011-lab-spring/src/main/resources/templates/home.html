@@ -5,7 +5,7 @@
 	<nav th:replace="fragments/nav" />
 	<div class="container" style="text-align: center">
 		<h2 th:text="#{welcome.message}"></h2>
-		<h3>Esta es una zona privada la web</h3>
+		<h3 th:text="#{private.message}"></h3>
 		<p>
 			Usuario Autenticado como : <b th:inline="text">
 				[[${#httpServletRequest.remoteUser}]] </b>
@@ -16,8 +16,8 @@
 				<thead>
 					<tr>
 						<th class="col-md-1">id</th>
-						<th>Descripción</th>
-						<th>Puntuación</th>
+						<th th:text="#{descripcion.message}"></th>
+						<th th:text="#{descripcion.message}"></th>
 						<th class="col-md-1"></th>
 						<th class="col-md-1"></th>
 						<th class="col-md-1"></th>
@@ -25,9 +25,9 @@
 				</thead>
 				<tbody>
 					<tr th:each="mark : ${markList}">
-						<td th:text="${mark.id}">1</td>
-						<td th:text="${mark.description}">Ejercicio 1</td>
-						<td th:text="${mark.score}">10</td>
+						<td th:text="${mark.id}"></td>
+						<td th:text="${mark.description}"></td>
+						<td th:text="${mark.score}"></td>
 						<td><a th:href="${'/mark/details/' + mark.id}">detalles</a></td>
 						<td><a th:href="${'/mark/edit/' + mark.id}">modificar</a></td>
 						<td><a th:href="${'/mark/delete/' + mark.id}">eliminar</a></td>
