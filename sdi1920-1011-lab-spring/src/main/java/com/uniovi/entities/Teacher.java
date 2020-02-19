@@ -39,7 +39,7 @@ public class Teacher {
 		return name;
 	}
 
-	public String getSurnames() {
+	public String getLastName() {
 		return surnames;
 	}
 

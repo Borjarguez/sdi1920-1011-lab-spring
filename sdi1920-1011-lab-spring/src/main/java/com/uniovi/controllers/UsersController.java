@@ -96,21 +96,18 @@ public class UsersController {
 
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String login(Model model) {
-		System.out.println("LLEgue login");
 		return "login";
 	}
 
 	@RequestMapping(value = { "/home" }, method = RequestMethod.GET)
 	public String home(Model model) {
 		 Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		 System.out.println("Llegue /home");
 		 String dni = auth.getName();
 		 User activeUser = usersService.getUserByDni(dni);
 		 model.addAttribute("markList", activeUser.getMarks());
 		 
 		 return "home";
 	}
-	
 
 	@RequestMapping("/user/list/update")
 	public String updateList(Model model) {
