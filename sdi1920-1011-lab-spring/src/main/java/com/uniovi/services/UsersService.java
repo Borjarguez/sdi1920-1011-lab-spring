@@ -34,6 +34,7 @@ public class UsersService {
 	}
 
 	public User getUserByDni(String dni) {
+		System.out.println("Dni: " + dni);
 		return usersRepository.findByDni(dni);
 	}
 
