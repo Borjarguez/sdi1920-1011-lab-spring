@@ -3,41 +3,45 @@
 <head th:replace="fragments/head" />
 <body>
 
-<!-- Barra de Navegación superior -->
-<nav th:replace="fragments/nav" />
+	<!-- Barra de Navegación superior -->
+	<nav th:replace="fragments/nav" />
 
+	<div class="container">
+		<h2>Profesores</h2>
+		<p>Los profesores que actualmente figuran en el sistema son los
+			siguientes:</p>
+		<div class="table-responsive">
+			<table class="table table-hover">
+				<thead>
+					<tr>
+						<th class="col-md-1">id</th>
+						<th>Nombre</th>
+						<th>Apellidos</th>
+						<th>Categoria</th>
+						<th class="col-md-1"></th>
+						<th class="col-md-1"></th>
+						<th class="col-md-1"></th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="teacher : ${teacherList}">
+						<td th:text="${teacher.id}">Id</td>
+						<td th:text="${teacher.name}">Nombre</td>
+						<td th:text="${teacher.surnames}">Apellidos</td>
+						<td th:text="${teacher.category}">Categoria</td>
+						<td
+							sec:authorize="hasRole('ROLE_ADMIN') || hasRole('ROLE_PROFESSOR')"><a
+							th:href="${'/teacher/details/' + teacher.id}">detalles</a></td>
+						<td sec:authorize="hasRole('ROLE_ADMIN')"><a
+							th:href="${'/teacher/edit/' + teacher.id}">modificar</a></td>
+						<td sec:authorize="hasRole('ROLE_ADMIN')"><a
+							th:href="${'/teacher/delete/' + teacher.id}">eliminar</a></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
 
-
-<div class="container">
-  <h2>Profesores</h2>
-  <p>Los profesores que actualmente figuran en el sistema son los siguientes:</p>                                                                                      
-  <div class="table-responsive">          
-  <table class="table table-hover">
-    <thead>
-      <tr>
-        <th class="col-md-1">id</th>
-        <th>Nombre</th>
-        <th>Apellidos</th>
-        <th>Categoria</th>
-		<th class="col-md-1"> </th>
-		<th class="col-md-1"> </th>
-		<th class="col-md-1"> </th>
-      </tr>
-    </thead>
-	<tbody>
-	  <tr th:each="teacher : ${teacherList}">
-	    <td th:text="${teacher.id}"> Id</td>
-	    <td th:text="${teacher.name}"> Nombre</td>
-	    <td th:text="${teacher.surnames}">Apellidos</td>
-	    <td><a th:href="${'/teacher/details/' + teacher.id}">detalles</a></td>
-	    <td><a th:href="${'/teacher/edit/' + teacher.id}">modificar</a></td>
-	    <td><a th:href="${'/teacher/delete/' + teacher.id}">eliminar</a></td>
-	  </tr>
-	</tbody>
-  </table>
-  </div>
-</div>
-
-<footer th:replace="fragments/footer" />
+	<footer th:replace="fragments/footer" />
 </body>
 </html>

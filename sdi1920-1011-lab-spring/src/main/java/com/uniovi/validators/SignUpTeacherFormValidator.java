@@ -32,7 +32,7 @@ public class SignUpTeacherFormValidator implements Validator {
 		if (user.getName().length() < 5 || user.getName().length() > 24) {
 			errors.rejectValue("name", "Error.signup.name.length");
 		}
-		if (user.getLastName().length() < 5 || user.getLastName().length() > 24) {
+		if (user.getSurnames().length() < 5 || user.getSurnames().length() > 24) {
 			errors.rejectValue("lastName", "Error.signup.lastName.length");
 		}
 		if (user.getCategory().length() < 5 || user.getCategory().length() > 24) {

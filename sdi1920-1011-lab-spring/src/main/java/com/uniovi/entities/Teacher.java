@@ -19,8 +19,7 @@ public class Teacher {
 
 	}
 
-	public Teacher(Long id, String dni, String name, String surnames, String category) {
-		this.id = id;
+	public Teacher(String dni, String name, String surnames, String category) {
 		this.dni = dni;
 		this.name = name;
 		this.surnames = surnames;
@@ -39,7 +38,7 @@ public class Teacher {
 		return name;
 	}
 
-	public String getLastName() {
+	public String getSurnames() {
 		return surnames;
 	}
 

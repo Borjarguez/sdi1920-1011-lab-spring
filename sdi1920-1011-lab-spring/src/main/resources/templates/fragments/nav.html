@@ -34,7 +34,7 @@
 						<li><a href="/user/list" th:text="#{seeUsers.message}"></a></li>
 					</ul></li>
 
-				<li><a href="/teacher/add" th:text="#{addTeacher.message}"></a></li>
+				<li sec:authorize="hasRole('ROLE_ADMIN')"><a href="/teacher/add" th:text="#{addTeacher.message}"></a></li>
 				<li><a href="/teacher/list" th:text="#{listTeacher.message}"></a></li>
 			</ul>
 
