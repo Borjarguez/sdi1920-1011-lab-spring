@@ -29,7 +29,6 @@ public class MarksService {
 
 	public Page<Mark> getMarks(Pageable pageable) {
 		Page<Mark> marks =	marksRepository.findAll(pageable);
-		System.out.println("Numero elementos:"+marks.getNumberOfElements());
 		return marks;
 	}
 

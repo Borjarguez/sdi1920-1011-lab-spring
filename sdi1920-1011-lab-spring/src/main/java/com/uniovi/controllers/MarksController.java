@@ -78,14 +78,14 @@ public class MarksController {
 
 	@RequestMapping(value = "/mark/add")
 	public String getMark(Model model) {
-		model.addAttribute("usersList", usersService.getUsers());
+		model.addAttribute("usersList", usersService.getAllUsers());
 		return "mark/add";
 	}
 
 	@RequestMapping(value = "/mark/edit/{id}")
 	public String getEdit(Model model, @PathVariable Long id) {
 		model.addAttribute("mark", marksService.getMark(id));
-		model.addAttribute("usersList", usersService.getUsers());
+		model.addAttribute("usersList", usersService.getAllUsers());
 		return "mark/edit";
 	}
 

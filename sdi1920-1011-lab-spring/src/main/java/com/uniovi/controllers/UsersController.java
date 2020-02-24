@@ -1,9 +1,11 @@
 package com.uniovi.controllers;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.LinkedList;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -37,15 +39,16 @@ public class UsersController {
 	private RolesService rolesService;
 
 	@RequestMapping("/user/list")
-	public String getList(Model model, @RequestParam(value = "", required=false) String searchText) {
-		List<User> users = new ArrayList<User>();
+	public String getList(Pageable pageable, Model model, @RequestParam(value = "", required=false) String searchText) {
+		Page<User> users = new PageImpl<User>(new LinkedList<User>());
 		
 		if(searchText != null && !searchText.isEmpty())
-			users = usersService.searchUsersByNameAndSurName(searchText);
+			users = usersService.searchUsersByNameAndSurName(pageable, searchText);
 		else
-			users = usersService.getUsers();
+			users = usersService.getUsers(pageable);
 		
-		model.addAttribute("usersList", users);
+		model.addAttribute("usersList", users.getContent());
+		model.addAttribute("page", users);
 		return "user/list";
 	}
 
@@ -126,8 +129,8 @@ public class UsersController {
 	}
 
 	@RequestMapping("/user/list/update")
-	public String updateList(Model model) {
-		model.addAttribute("usersList", usersService.getUsers());
+	public String updateList(Pageable pageable, Model model) {
+		model.addAttribute("usersList", usersService.getUsers(pageable));
 		return "mark/list :: tableUsers";
 	}
 }
