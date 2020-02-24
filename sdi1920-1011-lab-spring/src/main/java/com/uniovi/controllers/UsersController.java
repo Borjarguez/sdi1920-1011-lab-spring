@@ -101,7 +101,6 @@ public class UsersController {
 
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String login(Model model) {
-		System.out.println("Pase por login");
 		return "login";
 	}
 
