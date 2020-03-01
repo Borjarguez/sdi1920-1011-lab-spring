@@ -1,4 +1,4 @@
-package com.uniovi.utils;
+package com.uniovi.tests.util;
 
 
 import static org.junit.Assert.assertTrue;
@@ -13,7 +13,6 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class SeleniumUtils {
 
-	
 	/**
 	 * Aborta si el "texto" no está presente en la página actual
 	 * @param driver: apuntando al navegador abierto actualmente.

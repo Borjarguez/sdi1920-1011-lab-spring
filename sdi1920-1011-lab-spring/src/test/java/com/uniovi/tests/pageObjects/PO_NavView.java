@@ -7,7 +7,7 @@ import java.util.List;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-import com.uniovi.utils.SeleniumUtils;
+import com.uniovi.tests.util.SeleniumUtils;
 
 public class PO_NavView extends PO_View {
 

@@ -5,17 +5,20 @@ import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.FixMethodOrder;
+import org.junit.Test;
 import org.junit.runners.MethodSorters;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import com.uniovi.tests.pageObjects.PO_HomeView;
+import com.uniovi.tests.pageObjects.PO_Properties;
+
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 
 @SpringBootTest
 class Sdi19ApplicationTests {
-	// En Windows (Debe ser la versión 65.0.1 y desactivar las actualizacioens
-	// automáticas)):
+
 	static String PathFirefox65 = "C:\\Program Files\\Mozilla Firefox\\firefox.exe";
 	static String Geckdriver024 = "C:\\Users\\borja\\Documents\\BORJA\\REPOS\\SDI\\SPRING\\geckodriver024win64.exe";
 
@@ -51,6 +54,34 @@ class Sdi19ApplicationTests {
 	static public void end() {
 		// Cerramos el navegador al finalizar las pruebas
 		driver.quit();
+	}
+
+	// PR01. Acceder a la página principal /
+	@Test
+	public void PR01() {
+		PO_HomeView.checkWelcome(driver, PO_Properties.getSPANISH());
+	}
+
+	// PR02. OPción de navegación. Pinchar en el enlace Registro en la página home
+	@Test
+	public void PR02() {
+		PO_HomeView.clickOption(driver, "signup", "class", "btn btn-primary");
+	}
+
+	// PR03. OPción de navegación. Pinchar en el enlace Identificate en la página
+	// home
+	@Test
+	public void PR03() {
+		PO_HomeView.clickOption(driver, "login", "class", "btn btn-primary");
+	}
+
+	// PR04. OPción de navegación. Cambio de idioma de Español a Ingles y vuelta a
+	// Español
+	@Test
+	public void PR04() {
+		PO_HomeView.checkChangeIdiom(driver, "btnSpanish", "btnEnglish", PO_Properties.getSPANISH(),
+				PO_Properties.getENGLISH());
+		// SeleniumUtils.esperarSegundos(driver, 2);}
 	}
 
 }
