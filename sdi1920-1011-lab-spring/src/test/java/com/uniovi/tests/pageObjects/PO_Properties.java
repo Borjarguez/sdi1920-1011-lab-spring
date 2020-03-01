@@ -1,4 +1,4 @@
-package com.uniovi.pageObjects;
+package com.uniovi.tests.pageObjects;
 
 import java.io.UnsupportedEncodingException;
 import java.util.Locale;
