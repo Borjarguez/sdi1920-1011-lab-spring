@@ -12,9 +12,11 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import com.uniovi.tests.pageObjects.PO_HomeView;
+import com.uniovi.tests.pageObjects.PO_LoginView;
 import com.uniovi.tests.pageObjects.PO_Properties;
 import com.uniovi.tests.pageObjects.PO_RegisterView;
 import com.uniovi.tests.pageObjects.PO_View;
+import com.uniovi.tests.util.SeleniumUtils;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 
@@ -115,5 +117,59 @@ class Sdi19ApplicationTests {
 		PO_RegisterView.checkKey(driver, "Error.signup.name.length", PO_Properties.getSPANISH());
 		// Rellenamos el formulario.
 		PO_RegisterView.fillForm(driver, "99999990B", "Josefo", "Per", "77777", "77777");
+	}
+
+	public void PR07() {
+		// Vamos al formulario de logueo.
+		PO_HomeView.clickOption(driver, "login", "class", "btn btn-primary");
+		// Rellenamos el formulario
+		PO_LoginView.fillForm(driver, "99999990A", "123456");
+		// COmprobamos que entramos en la pagina privada de Alumno
+		PO_View.checkElement(driver, "text", "Notas del usuario");
+	}
+
+	public void PR08() {
+		// Vamos al formulario de logueo.
+		PO_HomeView.clickOption(driver, "login", "class", "btn btn-primary");
+		// Rellenamos el formulario
+		PO_LoginView.fillForm(driver, "99999993D", "123456");
+		// COmprobamos que entramos en la pagina privada de Alumno
+		PO_View.checkElement(driver, "text", "Notas del usuario");
+	}
+
+	// PRN. Loguearse con exito desde el ROl de Usuario, 99999990D, 123456
+	@Test
+	public void PR09() {
+		// Vamos al formulario de logueo.
+		PO_HomeView.clickOption(driver, "login", "class", "btn btn-primary");
+		// Rellenamos el formulario
+		PO_LoginView.fillForm(driver, "99999993D", "123456");
+		// COmprobamos que entramos en la pagina privada de Alumno
+		PO_View.checkElement(driver, "text", "Notas del usuario");
+	}
+
+	// PRN. Loguearse con error (Password incorrecta). también habría que probar a
+	// introducir los campos de forma incorrecta o vacíos.
+	@Test
+	public void PR10() {
+		// Vamos al formulario de logueo.
+		PO_HomeView.clickOption(driver, "login", "class", "btn btn-primary");
+		// Rellenamos el formulario con datos falsos
+		PO_LoginView.fillForm(driver, "99999988F", "xxxxxx");
+		// Comprobamos que No vamos a la página de opciones privadas (Esto se podria
+		// empaquetar.
+		SeleniumUtils.EsperaCargaPaginaNoTexto(driver, "Notas del usuario", PO_View.getTimeout());
+
+	}
+
+	// PRN. Loguearse y desconectarse usando el rol de estudiante.
+	@Test
+	public void PR11() {
+		// Vamos al formulario de logueo.
+		PO_HomeView.clickOption(driver, "login", "class", "btn btn-primary");
+		// Rellenamos el formulario
+		PO_LoginView.fillForm(driver, "99999990A", "123456");
+		// COmprobamos que entramos en la pagina privada de Alumno
+		PO_View.checkElement(driver, "text", "Notas del usuario");
 	}
 }
