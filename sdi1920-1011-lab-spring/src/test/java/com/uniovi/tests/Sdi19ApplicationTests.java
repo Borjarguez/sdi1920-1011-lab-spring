@@ -9,7 +9,7 @@ import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.FixMethodOrder;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.junit.runners.MethodSorters;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -43,9 +43,10 @@ class Sdi19ApplicationTests {
 		return driver;
 	}
 
-	// Antes de cada prueba se navega al URL home de la aplicaciónn
+	// Antes de cada prueba se navega al URL home de la aplicación
 	@Before
 	public void setUp() {
+		System.out.println("PASEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE");
 		driver.navigate().to(URL);
 	}
 
@@ -58,6 +59,7 @@ class Sdi19ApplicationTests {
 	// Antes de la primera prueba
 	@BeforeClass
 	static public void begin() {
+		SeleniumUtils.esperarSegundos(driver, 10);
 	}
 
 	// Al finalizar la última prueba
@@ -71,6 +73,7 @@ class Sdi19ApplicationTests {
 	@Test
 	public void PR01() {
 		PO_HomeView.checkWelcome(driver, PO_Properties.getSPANISH());
+		
 	}
 
 	// PR02. OPción de navegación. Pinchar en el enlace Registro en la página home
@@ -166,7 +169,6 @@ class Sdi19ApplicationTests {
 		// Comprobamos que No vamos a la página de opciones privadas (Esto se podria
 		// empaquetar.
 		SeleniumUtils.EsperaCargaPaginaNoTexto(driver, "Notas del usuario", PO_View.getTimeout());
-
 	}
 
 	// PRN. Loguearse y desconectarse usando el rol de estudiante.
@@ -181,8 +183,7 @@ class Sdi19ApplicationTests {
 	}
 
 	// PR12. Loguearse, comprobar que se visualizan 4 filas de notas y desconectarse
-	// usando el rol de
-//	estudiante.
+	// usando el rol de estudiante.
 	@Test
 	public void PR12() {
 		// Vamos al formulario de logueo.
